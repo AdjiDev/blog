@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+    body {
+      font-family: 'Press Start 2P', cursive;
+      background-color: #000000;
+      color: #00FF00;
+    }
+  </style>
+</head>
+<body class="bg-black text-green-500">
+
+  <div class="min-h-screen flex flex-col items-center justify-center space-y-8 px-4 sm:px-8">
+
+    <!-- Header -->
+    <header class="text-center">
+      <h1 class="text-3xl sm:text-4xl font-bold">Welcome to My Portfolio</h1>
+      <p class="text-lg sm:text-xl">Your Friendly Linux Developer</p>
+    </header>
+
+    <!-- Terminal-like Section -->
+    <section class="w-full max-w-3xl mx-auto mt-8">
+        <div class="bg-black p-6 border-2 border-green-500 rounded-lg shadow-lg">
+          <div class="space-y-6">
+            <!-- Terminal Prompt -->
+            <div class="flex items-center">
+              <span class="text-green-500">user@portfolio:~$</span>
+              <span class="text-white ml-2">cat index.html</span>
+            </div>
+      
+            <!-- Terminal Output -->
+            <div class="ml-6 text-green-500">
+              <p class="mb-2">Selamat datang di blog adjidev</p>
+              <p class="mb-4">Blog disini hanya membagikan proyek saya dan info dari saya</p>
+            </div>
+      
+            <!-- Projects Section -->
+            <div class="mt-6 space-y-6">
+              <div class="space-y-2">
+                <p class="text-white">- Proyek 1: <span class="text-yellow-500">Donlot video tt gratis</span></p>
+                <p class="text-white">Donlot link video tt gratis <span class="text-blue-500"><a href="https://adjidev.github.io/ambatron/">klik disini</a></span>.</p>
+              </div>
+              <div class="space-y-2">
+                <p class="text-white">- Proyek 2: <span class="text-yellow-500">Chat glopotol</span></p>
+                <p class="text-white">Chat glopotol pintar siap membantu anda <span class="text-blue-500"><a href="https://adjidev.github.io/chatglopotl">klik disini</a></span>.</p>
+              </div>
+              <div class="space-y-2">
+                <p class="text-white">- Proyek 3: <span class="text-yellow-500">Dokseng NIK</span></p>
+                <p class="text-white">Dokseng NIK orang sampe ke ubun ubun <span class="text-blue-500"><a href="https://adjidev.github.io/dokseng">klik disini</a></span></p>
+              </div>
+            </div>
+      
+            <!-- Terminal -->
+            <div class="flex items-center mt-4">
+              <span class="text-green-500">user@adjisan:~$</span>
+              <span class="text-white ml-2">exit</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+
+    <!-- Blog -->
+    <section class="w-full max-w-3xl mt-12">
+      <div class="bg-black p-6 border-2 border-green-500 rounded-lg">
+        <div class="space-y-4">
+          <!-- Terminal -->
+          <div class="flex items-center">
+            <span class="text-green-500">user@adjisan:~$</span>
+            <span class="text-white ml-2">cat posts.txt</span>
+          </div>
+
+          <!-- Post -->
+          <div class="ml-6 text-green-500">
+            <div class="border-b-2 border-green-500 pb-4">
+              <p class="text-yellow-500">[2024-7-12](ADJISAN)</p>
+              <p class="font-bold">Bot wangcapp</p>
+              <p>Bang adjisan bisa buat bot wangsaff sebisa nya bisa rek apa aja dah pokok nya.</p>
+            </div>
+            <div class="border-b-2 border-green-500 pb-4 mt-4">
+              <p class="text-yellow-500">[2024-7-12](ADJISAN)</p>
+              <p class="font-bold">Bot telegram</p>
+              <p>Bang adjisan bisa buat bot telegram juga sudah hafal di python dengan lib telebot.</p>
+            </div>
+            <div class="pb-4 mt-4">
+              <p class="text-yellow-500">[2024-7-12](ADJISAN)</p>
+              <p class="font-bold">Sungguh malas</p>
+              <p>Bang adji sedang lembur dan sibuk belajar bahasa C/C++.</p>
+            </div>
+          </div>
+
+          <!-- Terminal -->
+          <div class="flex items-center mt-4">
+            <span class="text-green-500">user@adjisan:~$</span>
+            <span class="text-white ml-2">exit</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-sm">
+      <p>adjisan, Inc</p>
+      <p>Contact: <span class="text-blue-500"><a href="https://t.me/adjidev">adjidev</a></span></p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
