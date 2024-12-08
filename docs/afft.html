@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AFFT | Adjisan Framework Forensic Tools">
+  <title>AFFT - Docs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Press Start 2P', sans-serif;
+    }
+
+    /* Scrollbar animation */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(90deg, #34d399, #10b981);
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(90deg, #10b981, #065f46);
+    }
+
+    /* Background canvas */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body class="bg-black text-green-300">
+  <canvas id="backgroundCanvas"></canvas>
+
+  <div class="container mx-auto px-4 py-8">
+    <header class="text-center mb-12">
+      <h1 class="text-4xl md:text-6xl text-green-500">AFFT</h1>
+      <p class="text-lg mt-4">Adjisan Framework Forensic Tools</p>
+    </header>
+
+    <main>
+      <section class="mb-12">
+        <h2 class="text-2xl text-green-400">Tentang AFFT</h2>
+        <p class="mt-4 text-justify">
+          AFFT adalah kerangka kerja untuk alat forensik yang membantu Anda melakukan berbagai tugas seperti scanning website (subdomain finder, direktori) dan alat-alat forensik lainnya.
+        </p>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="text-2xl text-green-400">Fitur Utama</h2>
+        <ul class="list-disc list-inside mt-4 space-y-2">
+          <li>Subdomain Finder</li>
+          <li>Direktori Scanner</li>
+          <li>Alat Forensik Lainnya</li>
+        </ul>
+      </section>
+
+      <section class="mb-12">
+        <h2 class="text-2xl text-green-400">Cara Penggunaan</h2>
+        <ol class="list-decimal list-inside mt-4 space-y-2">
+          <li>Unduh file AFFT dari link di bawah.</li>
+          <li>Ekstrak file ZIP.</li>
+          <li>Jalankan perintah sesuai dengan kebutuhan alat Anda.</li>
+        </ol>
+      </section>
+
+      <section class="text-center">
+        <a href="https://www.mediafire.com/file/i5iiy8jo6tzynh0/AFF.zip/file" target="_blank"
+           class="inline-block px-6 py-3 bg-green-500 text-black font-bold rounded hover:bg-green-700 transition">
+          Download AFFT
+        </a>
+      </section>
+    </main>
+
+    <footer class="mt-12 text-center text-sm text-gray-500">
+      © 2024 AFFT. Dibuat dengan cinta oleh Adjisan.
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('backgroundCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const particles = [];
+
+    class Particle {
+      constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 3 + 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if (this.x > canvas.width || this.x < 0) this.speedX *= -1;
+        if (this.y > canvas.height || this.y < 0) this.speedY *= -1;
+      }
+
+      draw() {
+        ctx.fillStyle = 'rgba(34, 197, 94, 0.7)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function init() {
+      for (let i = 0; i < 100; i++) {
+        particles.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      particles.length = 0;
+      init();
+    });
+  </script>
+</body>
+</html>
