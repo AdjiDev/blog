@@ -1,78 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="B.I.A | Badan Intelejen Adjisan">
-  <meta property="og:image" content="https://th.bing.com/th/id/OIP.Y-oi72NYGID_uwlY2si5jwHaEL?rs=1&pid=ImgDetMain">
-  <title>B.I.A | ADJISAN, INC | 2024</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Press Start 2P', cursive;
-    }
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Adjidev Software Inc">
+    <meta property="og:image" content="https://i.pinimg.com/474x/da/26/05/da2605f0de758e12835f3e2cccec908d.jpg">
+    <title>ADJISAN DEV TECH</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
 </head>
-<body class="bg-gray-900 text-white">
 
-  <!-- Background -->
-  <canvas id="animated-bg"></canvas>
+<body>
 
-  <!-- Header -->
-  <header class="text-center py-8">
-    <h1 class="text-4xl font-bold">Adjidev</h1>
-    <p class="text-lg mt-2 text-gray-400">Selamat datang di blog adjisan</p>
-  </header>
+    <header class="text-gray-600 body-font bg-white shadow-md">
+        <div class="container mx-auto flex flex-wrap p-5 flex-row items-center justify-between">
+            <a class="flex title-font font-medium items-center text-gray-900">
+                <img class="rounded-full w-12 h-12" src="https://files.catbox.moe/yd1o50.png" alt="Logo" />
+                <span class="ml-3 text-xl font-semibold">Adjisan Tech</span>
+            </a>
 
-  <!-- Portfolio -->
-<section class="max-w-4xl mx-auto px-4 mt-8">
-    <h2 class="text-2xl mb-4">Proyek Bang Adji</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <!-- Card 1 -->
-      <div class="bg-gray-800 p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg hover:bg-gray-700">
-        <h3 class="text-lg font-bold mb-2">Proyek 1</h3>
-        <p class="text-sm text-gray-400">Dokseng NIK orang <span class="text-violet-600"><a href="https://adjidev.github.io/dokseng">disini</a></span>.</p>
-      </div>
-      <!-- Card 2 -->
-      <div class="bg-gray-800 p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg hover:bg-gray-700">
-        <h3 class="text-lg font-bold mb-2">Proyek 2</h3>
-        <p class="text-sm text-gray-400">Donlot video tiktok <span class="text-violet-600"><a href="https://adjidev.github.io/ambatron">disini</a></span>.</p>
-      </div>
-      <!-- Card 3 -->
-      <div class="bg-gray-800 p-4 rounded-lg shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg hover:bg-gray-700">
-        <h3 class="text-lg font-bold mb-2">Proyek 3</h3>
-        <p class="text-sm text-gray-400">Chatglopotol pintar <span class="text-violet-600"><a href="https://adjidev.github.io/chatglopotol">disini</a></span>.</p>
-      </div>
-    </div>
-  </section>
+            <!-- Tombol Menu untuk Tampilan Mobile -->
+            <button id="menu-toggle" class="md:hidden text-gray-900 focus:outline-none">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
 
-  <section class="max-w-4xl mx-auto px-4 mt-12">
-    <h2 class="text-2xl mb-4">Blog</h2>
-    <div class="space-y-6">
-      <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-bold">Blog Post 1</h3>
-        <p class="text-sm text-gray-400">Lembur ...</p>
-        <a href="#" class="text-blue-400 text-sm">Read more</a>
-      </div>
-      <div class="bg-gray-800 p-4 rounded-lg shadow-md">
-        <h3 class="text-lg font-bold">Blog Post 2</h3>
-        <p class="text-sm text-gray-400">Lembur ...</p>
-        <a href="#" class="text-blue-400 text-sm">Read more</a>
-      </div>
-    </div>
-  </section>
+            <!-- Navigasi -->
+            <nav id="menu" class="hidden md:flex md:items-center md:space-x-6 text-base">
+                <a href="#" class="hover:text-gray-900">Contact</a>
+                <a href="#" class="hover:text-gray-900">About</a>
+                <a href="#" class="hover:text-gray-900">Home</a>
+                <a href="#" class="hover:text-gray-900">Service</a>
+            </nav>
+        </div>
 
-  <footer class="text-center py-8 mt-12 text-gray-500">
-    <p>© 2024 adjisan, Inc</p>
-  </footer>
+        <!-- Navigasi Mobile -->
+        <nav id="mobile-menu" class="hidden md:hidden bg-white w-full p-5 shadow-md">
+            <a href="#" class="block py-2 hover:text-gray-900">Contact</a>
+            <a href="#" class="block py-2 hover:text-gray-900">About</a>
+            <a href="#" class="block py-2 hover:text-gray-900">Home</a>
+            <a href="#" class="block py-2 hover:text-gray-900">Service</a>
+        </nav>
+    </header>
 
-  <script src="background.js"></script>
+    <section class="text-gray-600 body-font" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+        <div class="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+            <div
+                class="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+                <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
+                    Adjidev
+                    <br class="hidden lg:inline-block">Software Inc.
+                </h1>
+                <p class="mb-8 leading-relaxed">
+                    Welcome to the official website of AdjiSanDev! Find our latest information and projects here.
+                </p>
+                <div class="flex justify-center">
+                    <button
+                        class="inline-flex text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+                        Explore
+                    </button>
+                    <button
+                        class="ml-4 inline-flex text-gray-700 bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-lg">
+                        Contact
+                    </button>
+                </div>
+            </div>
+            <div class="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
+                <img class="object-cover object-center rounded" alt="Gambar ilustrasi teknologi"
+                    src="https://www.rover.com/blog/wp-content/uploads/2019/08/scottish-fold-orange.jpg">
+            </div>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font" data-aos="fade-in" data-aos-delay="300" data-aos-duration="1000">
+        <div class="container px-5 py-24 mx-auto">
+            <!-- Judul -->
+            <div class="flex flex-col text-center w-full mb-20" data-aos="fade-up" data-aos-delay="400">
+                <h2 class="text-xs text-indigo-500 tracking-widest font-medium title-font mb-1">MY PROJECTS</h2>
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">My List Project Of The Weeks
+                </h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">.</p>
+            </div>
+
+            <!-- Daftar Proyek -->
+            <div class="flex flex-wrap">
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60"
+                    data-aos="fade-right" data-aos-delay="500">
+                    <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">
+                        WhatsApp Bot <b>iChannBot v2.5</b>
+                    </h2>
+                    <p class="leading-relaxed text-base mb-4">
+                        On January the 3rd I developed a WhatsApp bot using lib Baileys from Node.js. The first project
+                        is named <b>ShatterBot</b>.
+                    </p>
+                    <a class="text-indigo-500 inline-flex items-center">Learn More
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60"
+                    data-aos="fade-left" data-aos-delay="600">
+                    <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Network Security</h2>
+                    <p class="leading-relaxed text-base mb-4">
+                        I am also learning and understanding about network security.
+                    </p>
+                    <a class="text-indigo-500 inline-flex items-center">Learn More
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60"
+                    data-aos="fade-right" data-aos-delay="600">
+                    <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Backend Developer</h2>
+                    <p class="leading-relaxed text-base mb-4">
+                        I am a bit professional in the backend such as C/C++, python, java, C#, PHP and nodejs
+                    </p>
+                    <a class="text-indigo-500 inline-flex items-center">Learn More
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="xl:w-1/4 lg:w-1/2 md:w-full px-8 py-6 border-l-2 border-gray-200 border-opacity-60"
+                    data-aos="fade-left" data-aos-delay="600">
+                    <h2 class="text-lg sm:text-xl text-gray-900 font-medium title-font mb-2">Web Security</h2>
+                    <p class="leading-relaxed text-base mb-4">
+                        I've learned and understood about site security from 2023 but it may not be effective
+                    </p>
+                    <a class="text-indigo-500 inline-flex items-center">Learn More
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Tombol -->
+            <button
+                class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+                data-aos="zoom-in" data-aos-delay="700">
+                Get Started
+            </button>
+        </div>
+    </section>
+
+    <section class="text-gray-600 body-font" data-aos="zoom-in">
+        <div class="container px-5 py-24 mx-auto flex flex-wrap">
+            <div class="flex w-full mb-20 flex-wrap">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font text-gray-900 lg:w-1/3 lg:mb-0 mb-4">Gallery Of
+                    Adjisan</h1>
+                <p class="lg:pl-6 lg:w-2/3 mx-auto leading-relaxed text-base">Daily Gallery.</p>
+            </div>
+            <div class="flex flex-wrap md:-m-2 -m-1">
+                <div class="flex flex-wrap w-1/2">
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="100">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://th.bing.com/th/id/OIP.xWQhxtjuvFXkPvUePCcqTAHaEU?w=293&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="200">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://th.bing.com/th/id/OIP.g0lf46Ul5TcYZQiuVkpKRAHaGu?rs=1&pid=ImgDetMain">
+                    </div>
+                    <div class="md:p-2 p-1 w-full" data-aos="fade-up" data-aos-delay="300">
+                        <img alt="gallery" class="w-full h-full object-cover object-center block"
+                            src="https://th.bing.com/th/id/OIP.n_8Kc3IXqsWY4CrVykaRHwHaHa?rs=1&pid=ImgDetMain">
+                    </div>
+                </div>
+                <div class="flex flex-wrap w-1/2">
+                    <div class="md:p-2 p-1 w-full" data-aos="fade-up" data-aos-delay="400">
+                        <img alt="gallery" class="w-full h-full object-cover object-center block"
+                            src="https://i.pinimg.com/736x/cb/53/34/cb53342df640180a330dc3ab0e361afa.jpg">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="500">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://i.pinimg.com/736x/6e/a9/57/6ea9573fc05501c93ea3d967fa11ae43.jpg">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="600">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://i.pinimg.com/736x/bc/87/14/bc87148b6d75b8cf59353d6628a406e9.jpg">
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-wrap md:-m-2 -m-1">
+                <div class="flex flex-wrap w-1/2">
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="100">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://th.bing.com/th/id/OIP.xWQhxtjuvFXkPvUePCcqTAHaEU?w=293&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="200">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://th.bing.com/th/id/OIP.g0lf46Ul5TcYZQiuVkpKRAHaGu?rs=1&pid=ImgDetMain">
+                    </div>
+                    <div class="md:p-2 p-1 w-full" data-aos="fade-up" data-aos-delay="300">
+                        <img alt="gallery" class="w-full h-full object-cover object-center block"
+                            src="https://th.bing.com/th/id/OIP.n_8Kc3IXqsWY4CrVykaRHwHaHa?rs=1&pid=ImgDetMain">
+                    </div>
+                </div>
+                <div class="flex flex-wrap w-1/2">
+                    <div class="md:p-2 p-1 w-full" data-aos="fade-up" data-aos-delay="400">
+                        <img alt="gallery" class="w-full h-full object-cover object-center block"
+                            src="https://i.pinimg.com/736x/cb/53/34/cb53342df640180a330dc3ab0e361afa.jpg">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="500">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://i.pinimg.com/736x/6e/a9/57/6ea9573fc05501c93ea3d967fa11ae43.jpg">
+                    </div>
+                    <div class="md:p-2 p-1 w-1/2" data-aos="fade-up" data-aos-delay="600">
+                        <img alt="gallery" class="w-full object-cover h-full object-center block"
+                            src="https://i.pinimg.com/736x/bc/87/14/bc87148b6d75b8cf59353d6628a406e9.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section data-aos="fade-up" data-aos-duration="1000">
+        <div class="px-5 grid gap-8 grid-cols-1 md:grid-cols-2 py-24 mx-auto bg-gray-100 text-gray-900 rounded-lg">
+            <!-- Left Column -->
+            <div class="flex flex-col justify-center" data-aos="fade-right" data-aos-delay="200">
+                <div>
+                    <h2 class="text-4xl lg:text-5xl font-bold leading-tight">
+                        Lets talk to adjidev & iChanna
+                    </h2>
+                    <div class="text-gray-700 mt-8">
+                        Hate forms? Send us an&nbsp;
+                        <a class="underline" href="mailto:adjidev@adjisandev.tech">
+                            email
+                        </a>
+                        instead.
+                    </div>
+                </div>
+                <div class="mt-12 text-center">
+                    <img src="https://i.pinimg.com/736x/46/9c/ac/469cacaf4ab1c5dac52a583693637d50.jpg" alt="Contact"
+                        data-aos="zoom-in" data-aos-delay="300" />
+                </div>
+            </div>
+
+            <!-- Right Column (Form) -->
+            <form data-aos="fade-left" data-aos-delay="400">
+                <div>
+                    <span class="uppercase text-sm text-gray-600 font-bold">
+                        Full Name
+                    </span>
+                    <input
+                        class="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-400"
+                        type="text" placeholder="Enter your Name" required />
+                </div>
+                <div class="mt-8">
+                    <span class="uppercase text-sm text-gray-600 font-bold">
+                        Email
+                    </span>
+                    <input
+                        class="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-400"
+                        type="email" placeholder="Enter your email address" required />
+                </div>
+                <div class="mt-8">
+                    <span class="uppercase text-sm text-gray-600 font-bold">
+                        Phone Number
+                    </span>
+                    <input
+                        class="w-full bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-400"
+                        type="phone" placeholder="Enter your Phone Number including country code" required />
+                </div>
+                <div class="mt-8">
+                    <span class="uppercase text-sm text-gray-600 font-bold">
+                        Message
+                    </span>
+                    <textarea
+                        class="w-full h-32 bg-gray-200 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline focus:ring-2 focus:ring-indigo-400"
+                        placeholder="Enter your Message" required></textarea>
+                </div>
+                <div class="mt-8">
+                    <button
+                        class="uppercase text-sm font-bold tracking-wide bg-indigo-500 text-gray-100 p-3 rounded-lg w-full focus:outline-none focus:shadow-outline hover:bg-indigo-700"
+                        type="submit">
+                        Send Message
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="text-gray-600 body-font">
+        <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
+            <div class="w-64 flex-shrink-0 md:mx-0 mx-auto text-center md:text-left" data-aos="fade-up" data-aos-duration="1000">
+                <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+                    <img class="rounded-full w-16 h-16" src="https://i.pinimg.com/736x/cb/53/34/cb53342df640180a330dc3ab0e361afa.jpg" alt="Image" />
+                    <span class="ml-3 text-xl">Adjisan dev & iChanna</span>
+                </a>
+                <p class="mt-2 text-sm text-gray-500">Adjidev Software inc</p>
+            </div>
+            <div class="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+                <div class="lg:w-1/4 md:w-1/2 w-full px-4">
+                    <h2 class="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">The End</h2>
+                    <nav class="list-none mb-10">
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Home</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Contact</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Github</a>
+                        </li>
+                        <li>
+                            <a class="text-gray-600 hover:text-gray-800">Instagram</a>
+                        </li>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-100">
+            <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                <p class="text-gray-500 text-sm text-center sm:text-left" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="400">© 2025 adjisandev.tech —
+                    <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" class="text-gray-600 ml-1" target="_blank">@adjidev & @ichanna</a>
+                </p>
+                <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+                    <a class="text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                        </svg>
+                    </a>
+                    <a class="ml-3 text-gray-500">
+                        <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                            <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+                            <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                        </svg>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- AOS Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>    
+
+    <!-- AOS Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            AOS.init();
+        });
+    </script>
+    <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuToggle.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
+    </script>
+
 </body>
+
 </html>
