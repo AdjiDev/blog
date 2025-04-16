@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adjidev Game Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+        }
+        
+        .glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.7);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+            }
+        }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-grid">
+    <main class="min-h-screen flex flex-col items-center justify-center p-4 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 animate__animated animate__fadeInDown glow text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                Game Projects
+            </h1>
+            <p class="text-gray-400 max-w-lg mx-auto animate__animated animate__fadeIn animate__delay-1s">
+                Explore my collection of interactive games and challenges. Each project offers a unique experience.
+            </p>
+        </div>
+        
+        <div class="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12 animate__animated animate__fadeInUp animate__delay-1s">
+            <a href="fart.html" class="card-hover group relative overflow-hidden rounded-xl bg-gray-800 p-6 shadow-xl transition-all duration-300 hover:bg-gray-700 border border-gray-700">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold text-white mb-2">2048</h3>
+                    <p class="text-gray-400">The classic sliding puzzle game with a modern twist.</p>
+                    <div class="mt-4 flex items-center text-blue-400">
+                        <span>Play Now</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="mystery.html" class="card-hover group relative overflow-hidden rounded-xl bg-gray-800 p-6 shadow-xl transition-all duration-300 hover:bg-gray-700 border border-gray-700">
+                <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-purple-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold text-white mb-2">Dark Internet Riddle</h3>
+                    <p class="text-gray-400">Unravel the mysteries of the deep web in this thrilling adventure.</p>
+                    <div class="mt-4 flex items-center text-purple-400">
+                        <span>Begin Journey</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+            
+            <a href="bodan.html" class="card-hover group relative overflow-hidden rounded-xl bg-gray-800 p-6 shadow-xl transition-all duration-300 hover:bg-gray-700 border border-gray-700">
+                <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-green-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-bold text-white mb-2">Cryptograph Challenge</h3>
+                    <p class="text-gray-400">Solve cryptographs with Prof. Shindji in this mind-bending puzzle game.</p>
+                    <div class="mt-4 flex items-center text-green-400">
+                        <span>Start Solving</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </div>
+        
+        <button class="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl shadow-lg hover:from-blue-500 hover:to-blue-400 transition duration-300 font-semibold text-white pulse-animation animate__animated animate__fadeIn animate__delay-2s flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zM8 7a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zM14 4a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z" />
+            </svg>
+            View Leaderboard
+        </button>
+        
+        <footer class="mt-16 text-gray-500 text-sm animate__animated animate__fadeIn animate__delay-2s">
+            © 2025 Adjidev Game Projects. All rights reserved.
+        </footer>
+    </main>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__fadeInUp');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.card-hover').forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>

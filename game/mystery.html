@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Misteri Dunia Gelap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/kempreng.css">
+</head>
+
+<body class="min-h-screen flex flex-col">
+    <!-- Layar Intro -->
+    <div id="intro-screen"
+        class="fixed inset-0 bg-black bg-opacity-90 flex flex-col items-center justify-center z-50 p-4">
+        <h1 class="text-4xl font-bold mb-6 text-blue-400 glitch" data-text="Misteri Dunia Gelap">Misteri Dunia Gelap</h1>
+        <div class="max-w-md text-center mb-8 text-white">
+            <p class="mb-4">Dua tahun lalu, Icha menghilang tanpa jejak. Polisi menutup kasusnya, tapi teman-temannya tak pernah berhenti mencari.</p>
+            <p>Sekarang, kamu menemukan aplikasi chat misterius yang mungkin menyimpan kunci untuk mengungkap kepergiannya.</p>
+        </div>
+        <div class="w-full max-w-xs">
+            <input id="player-name" type="text" placeholder="Namamu (3-20 karakter)"
+                class="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <button id="start-game"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-200">
+                Masuk ke Chat
+            </button>
+        </div>
+    </div>
+
+    <!-- Layar Utama Game -->
+    <div id="game-screen" class="hidden flex-1 flex flex-col max-w-6xl mx-auto w-full">
+        <header class="bg-gray-900 p-4 border-b border-gray-800">
+            <h2 class="text-xl font-bold">WhatsDji Chat</h2>
+            <div class="flex justify-between items-center mt-2">
+                <div>
+                    <span id="player-display-name" class="font-mono text-blue-400"></span>
+                    <span class="text-green-500 ml-2">● Online</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="clues-btn" class="text-yellow-400 hover:text-yellow-300">
+                        <i class="fas fa-clipboard-list mr-1"></i> Petunjuk
+                    </button>
+                    <button id="notes-btn" class="text-purple-400 hover:text-purple-300">
+                        <i class="fas fa-edit mr-1"></i> Catatan
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="flex flex-1 overflow-hidden">
+            <!-- Sidebar Kontak -->
+            <div class="w-64 bg-gray-800 border-r border-gray-700 flex flex-col">
+                <div class="p-4 border-b border-gray-700">
+                    <h3 class="font-bold text-lg mb-2">Kontak</h3>
+                    <div class="relative">
+                        <input type="text" placeholder="Cari..."
+                            class="w-full bg-gray-700 px-3 py-1 rounded text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div id="contacts-list" class="flex-1 overflow-y-auto">
+                    <!-- Kontak ditambahkan secara dinamis -->
+                </div>
+                <div class="p-4 border-t border-gray-700">
+                    <h3 class="font-bold text-lg mb-2">Grup Chat</h3>
+                    <div id="group-chats" class="text-gray-400">
+                        <p>Tidak ada grup chat</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Area Chat Utama -->
+            <div class="flex-1 flex flex-col bg-gray-900">
+                <!-- Header Chat -->
+                <div id="chat-header" class="p-4 border-b border-gray-800 flex items-center">
+                    <img id="current-contact-avatar" src="" alt="" class="w-10 h-10 rounded-full mr-3">
+                    <div>
+                        <h3 id="current-contact-name" class="font-bold">Pilih kontak</h3>
+                        <p id="current-contact-status" class="text-sm text-gray-400">Offline</p>
+                    </div>
+                </div>
+
+                <!-- Kontainer Pesan -->
+                <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-2">
+                    <div class="text-center text-gray-500 py-8">
+                        Pilih kontak untuk mulai percakapan
+                    </div>
+                </div>
+
+                <!-- Area Input -->
+                <div class="p-4 border-t border-gray-800">
+                    <div id="typing-indicator" class="text-sm text-gray-400 mb-2 h-5 hidden">
+                        <span class="typing-indicator"></span>
+                    </div>
+                    <div class="flex space-x-2">
+                        <input id="message-input" type="text" placeholder="Ketik pesan..."
+                            class="flex-1 bg-gray-800 border border-gray-700 rounded px-4 py-2 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                            disabled>
+                        <button id="send-btn"
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-200"
+                            disabled>
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Petunjuk -->
+    <div id="clues-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold">Petunjukmu</h3>
+                <button id="close-clues" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="clues-list" class="flex-1 overflow-y-auto p-4 space-y-4">
+                <div class="text-gray-400 text-center py-8">Belum ada petunjuk yang ditemukan</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Catatan -->
+    <div id="notes-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-lg max-w-2xl w-full max-h-[80vh] overflow-hidden flex flex-col">
+            <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+                <h3 class="text-xl font-bold">Catatanmu</h3>
+                <button id="close-notes" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="flex-1 overflow-hidden flex flex-col">
+                <textarea id="notes-textarea" class="flex-1 bg-gray-900 p-4 text-white focus:outline-none resize-none"
+                    placeholder="Tulis catatanmu di sini..."></textarea>
+                <div class="p-4 border-t border-gray-700 flex justify-end">
+                    <button id="save-notes"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition duration-200">
+                        Simpan Catatan
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <script src="js/game.js"></script>
+</body>
+
+</html>

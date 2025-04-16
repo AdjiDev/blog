@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptograph Quiz With Professor Shindji</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .bubble {
+            max-width: 70%;
+            padding: 12px 16px;
+            border-radius: 18px;
+            margin: 8px 0;
+            position: relative;
+            word-wrap: break-word;
+        }
+        
+        .sender-bubble {
+            background-color: #3b82f6;
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .receiver-bubble {
+            background-color: #e5e7eb;
+            color: black;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .typing-indicator {
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+            background-color: #e5e7eb;
+            border-radius: 18px;
+            padding: 10px;
+        }
+        
+        .typing-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #6b7280;
+            border-radius: 50%;
+            margin: 0 2px;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) {
+            animation-delay: 0s;
+        }
+        
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        .puzzle-input {
+            border: 2px solid #3b82f6;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-right: 8px;
+        }
+        
+        .puzzle-submit {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .puzzle-submit:hover {
+            background-color: #2563eb;
+        }
+        
+        .note {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            width: 80%;
+            max-width: 500px;
+        }
+        
+        .note textarea {
+            width: 100%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            resize: none;
+            margin-bottom: 10px;
+        }
+        
+        .note button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        
+        .clue {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        
+        .clue button {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="start-screen flex flex-col items-center justify-center min-h-screen p-4 text-center">
+        <h1 class="text-3xl font-bold mb-4 text-blue-600">Cryptograph Quiz With Professor Shindji</h1>
+        <p class="text-lg mb-8 text-gray-700 max-w-md">Your goal is to solve cryptographic puzzles with Professor Shindji. Decipher messages, crack codes, and uncover secrets through your conversation.</p>
+        
+        <div class="mb-6 w-full max-w-xs">
+            <input type="text" id="name" placeholder="Enter your name (3-20 characters)" 
+                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="name-error" class="text-red-500 text-sm mt-1 hidden">Name must be between 3-20 characters</p>
+        </div>
+        
+        <button id="start-btn" class="px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors">
+            Start Puzzle Adventure
+        </button>
+    </div>
+    
+    <main class="game-container hidden max-w-4xl mx-auto p-4 bg-white rounded-lg shadow-lg min-h-screen">
+        <div class="flex flex-col md:flex-row gap-6">
+            <!-- Contact Panel -->
+            <div class="contact-panel w-full md:w-1/4 bg-gray-50 p-4 rounded-lg">
+                <h3 class="text-xl font-semibold mb-4 text-gray-800 border-b pb-2">Contacts</h3>
+                <div class="contact-list">
+                    <div class="contact-item flex items-center justify-between p-3 bg-blue-100 rounded-lg mb-2 cursor-pointer" data-contact="profShindji">
+                        <div class="flex items-center">
+                            <div class="avatar w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">PS</div>
+                            <div>
+                                <p class="font-medium">Prof. Shindji</p>
+                                <p class="text-xs text-gray-500" id="prof-status">Online</p>
+                            </div>
+                        </div>
+                        <span class="online-indicator w-3 h-3 rounded-full bg-green-500"></span>
+                    </div>
+                </div>
+                
+                <div class="tools mt-8">
+                    <button id="note-btn" class="w-full flex items-center justify-start p-3 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-edit mr-3 text-blue-600"></i>
+                        <span>Notepad</span>
+                    </button>
+                    <button id="clue-btn" class="w-full flex items-center justify-start p-3 rounded-lg hover:bg-gray-200 transition-colors">
+                        <i class="fas fa-lightbulb mr-3 text-yellow-500"></i>
+                        <span>Get Clue</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Chat Area -->
+            <div class="chat-area flex-1 flex flex-col">
+                <div class="chat-header border-b pb-3 mb-4">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <div class="avatar w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold mr-3">PS</div>
+                        <span>Prof. Shindji</span>
+                    </h2>
+                </div>
+                
+                <div class="chat-messages flex-1 overflow-y-auto mb-4 space-y-3" id="chat-messages">
+                    <!-- Messages will appear here -->
+                </div>
+                
+                <div class="chat-input-area border-t pt-4">
+                    <div id="player-choices" class="mb-3 space-y-2">
+                        <!-- Choice buttons will appear here -->
+                    </div>
+                    
+                    <div class="flex items-center" id="input-container">
+                        <input type="text" id="message-input" placeholder="Type your answer..." class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <button id="send-btn" class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition-colors">
+                            Send
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <!-- Note Modal -->
+    <div class="note-modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="note bg-white rounded-lg p-6 w-full max-w-md">
+            <h3 class="text-xl font-semibold mb-4">Your Notes</h3>
+            <textarea id="note-content" placeholder="Write your notes here..."></textarea>
+            <div class="flex justify-end">
+                <button id="save-note" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mr-2">Save</button>
+                <button id="close-note" class="px-4 py-2 bg-gray-300 text-gray-800 rounded-lg hover:bg-gray-400">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Clue Modal -->
+    <div class="clue-modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="clue bg-white rounded-lg p-6 w-full max-w-md text-center">
+            <h3 class="text-xl font-semibold mb-4">Need a Clue?</h3>
+            <p id="clue-text">Chat with Professor Shindji first to unlock clues.</p>
+            <button id="close-clue" class="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // Game State
+        const gameState = {
+            playerName: "",
+            currentPuzzle: 0,
+            puzzlesSolved: 0,
+            notes: localStorage.getItem('cryptographNotes') || "",
+            cluesUnlocked: []
+        };
+
+        // Puzzles Data
+        const puzzles = [
+            {
+                id: 1,
+                title: "Caesar Cipher",
+                description: "The message has been shifted by a certain number of letters in the alphabet.",
+                initialMessage: "Ah, I see you're interested in cryptography! Let's start with something simple. I've received this message: 'Khoor, zruog!' Can you decipher it? Hint: It's a Caesar shift.",
+                answer: "Hello, world!",
+                clue: "Try shifting each letter back by 3 positions in the alphabet.",
+                type: "caesar",
+                shift: 3
+            },
+            {
+                id: 2,
+                title: "Atbash Cipher",
+                description: "A substitution cipher where each letter is mapped to its reverse in the alphabet.",
+                initialMessage: "Excellent work! Ready for the next challenge? Here's another encoded message: 'Zgyzhs'. This one uses the Atbash cipher. Can you decode it?",
+                answer: "Atbash",
+                clue: "A ↔ Z, B ↔ Y, C ↔ X, and so on through the alphabet.",
+                type: "atbash"
+            },
+            {
+                id: 3,
+                title: "Keyword Cipher",
+                description: "A cipher that uses a keyword to rearrange the alphabet.",
+                initialMessage: "Impressive! Now let's try something more complex. I found this message: 'Xlmw mw e qiwweki'. The keyword is 'SECRET'. Can you decode it?",
+                answer: "This is a cipher",
+                clue: "First write the keyword (without duplicate letters), then the remaining letters of the alphabet in order, skipping any letters already in the keyword.",
+                type: "keyword",
+                keyword: "SECRET"
+            },
+            {
+                id: 4,
+                title: "Vigenère Cipher",
+                description: "A method of encrypting alphabetic text by using a simple form of polyalphabetic substitution.",
+                initialMessage: "You're doing remarkably well! Here's a tougher one: 'Rijvs uyvjn'. The keyword is 'CODE'. Can you crack this Vigenère cipher?",
+                answer: "Crack me",
+                clue: "For each letter, find the keyword letter that corresponds and use it to shift back.",
+                type: "vigenere",
+                keyword: "CODE"
+            },
+            {
+                id: 5,
+                title: "Final Challenge",
+                description: "A combination of techniques to test all you've learned.",
+                initialMessage: "For your final challenge, decode this message: 'Gur cnffjbeq vf 5yy'. It uses a combination of techniques we've covered. Good luck!",
+                answer: "The password is 5ll",
+                clue: "Start with Atbash, then apply a Caesar shift.",
+                type: "combined"
+            }
+        ];
+
+        // DOM Elements
+        const startScreen = document.querySelector('.start-screen');
+        const gameContainer = document.querySelector('.game-container');
+        const nameInput = document.getElementById('name');
+        const nameError = document.getElementById('name-error');
+        const startBtn = document.getElementById('start-btn');
+        const chatMessages = document.getElementById('chat-messages');
+        const messageInput = document.getElementById('message-input');
+        const sendBtn = document.getElementById('send-btn');
+        const playerChoices = document.getElementById('player-choices');
+        const noteModal = document.querySelector('.note-modal');
+        const noteContent = document.getElementById('note-content');
+        const saveNoteBtn = document.getElementById('save-note');
+        const closeNoteBtn = document.getElementById('close-note');
+        const noteBtn = document.getElementById('note-btn');
+        const clueModal = document.querySelector('.clue-modal');
+        const clueText = document.getElementById('clue-text');
+        const closeClueBtn = document.getElementById('close-clue');
+        const clueBtn = document.getElementById('clue-btn');
+        const profStatus = document.getElementById('prof-status');
+
+        // Initialize game
+        function initGame() {
+            // Load notes from localStorage
+            noteContent.value = gameState.notes;
+            
+            // Start with the first puzzle
+            startPuzzle(0);
+        }
+
+        // Start a puzzle
+        function startPuzzle(index) {
+            gameState.currentPuzzle = index;
+            const puzzle = puzzles[index];
+            
+            // Clear chat
+            chatMessages.innerHTML = '';
+            
+            // Add initial message
+            addMessage('received', puzzle.initialMessage);
+            
+            // Unlock clue for this puzzle
+            if (!gameState.cluesUnlocked.includes(puzzle.id)) {
+                gameState.cluesUnlocked.push(puzzle.id);
+            }
+        }
+
+        // Add a message to the chat
+        function addMessage(type, text, delay = 0) {
+            if (delay > 0) {
+                // Show typing indicator
+                const typingIndicator = document.createElement('div');
+                typingIndicator.className = 'typing-indicator flex items-center justify-center';
+                typingIndicator.innerHTML = `
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                `;
+                chatMessages.appendChild(typingIndicator);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+                
+                // Remove typing indicator after delay
+                setTimeout(() => {
+                    chatMessages.removeChild(typingIndicator);
+                    createMessage(type, text);
+                }, delay);
+            } else {
+                createMessage(type, text);
+            }
+        }
+
+        function createMessage(type, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `bubble ${type}-bubble fade-in`;
+            messageDiv.textContent = text;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Show player choices
+        function showChoices(choices) {
+            playerChoices.innerHTML = '';
+            
+            choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.className = 'w-full text-left px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors';
+                button.textContent = choice.text;
+                button.addEventListener('click', () => {
+                    playerChoices.innerHTML = '';
+                    addMessage('sent', choice.text);
+                    if (choice.action) {
+                        setTimeout(() => choice.action(), 1000);
+                    }
+                });
+                playerChoices.appendChild(button);
+            });
+        }
+
+        // Check puzzle answer
+        function checkAnswer(answer) {
+            const puzzle = puzzles[gameState.currentPuzzle];
+            
+            if (answer.toLowerCase() === puzzle.answer.toLowerCase()) {
+                // Correct answer
+                addMessage('received', `Correct! "${puzzle.answer}" is indeed the right answer. Well done!`, 1500);
+                
+                // Update solved count
+                gameState.puzzlesSolved++;
+                
+                // Show next puzzle or completion
+                if (gameState.currentPuzzle < puzzles.length - 1) {
+                    setTimeout(() => {
+                        showChoices([
+                            {
+                                text: "What's the next puzzle?",
+                                action: () => {
+                                    startPuzzle(gameState.currentPuzzle + 1);
+                                }
+                            },
+                            {
+                                text: "Can you explain how this cipher works?",
+                                action: () => {
+                                    addMessage('received', `Certainly! ${puzzle.description}`, 1000);
+                                    setTimeout(() => {
+                                        showChoices([
+                                            {
+                                                text: "Let's try the next puzzle",
+                                                action: () => {
+                                                    startPuzzle(gameState.currentPuzzle + 1);
+                                                }
+                                            }
+                                        ]);
+                                    }, 1500);
+                                }
+                            }
+                        ]);
+                    }, 2000);
+                } else {
+                    // Game completed
+                    setTimeout(() => {
+                        addMessage('received', "Congratulations! You've solved all the puzzles. You truly have a talent for cryptography!", 1500);
+                    }, 2000);
+                }
+            } else {
+                // Wrong answer
+                addMessage('received', "Hmm, that doesn't seem quite right. Try again or ask for a clue if you're stuck.", 1500);
+            }
+        }
+
+        // Apply Caesar cipher
+        function caesarCipher(text, shift, decrypt = false) {
+            return text.replace(/[a-z]/gi, c => {
+                const base = c < 'a' ? 65 : 97;
+                const offset = decrypt ? (26 - shift) % 26 : shift;
+                return String.fromCharCode((c.charCodeAt(0) - base + offset) % 26 + base);
+            });
+        }
+
+        // Apply Atbash cipher
+        function atbashCipher(text) {
+            return text.replace(/[a-z]/gi, c => {
+                const base = c < 'a' ? 65 : 97;
+                return String.fromCharCode(25 - (c.charCodeAt(0) - base) + base);
+            });
+        }
+
+        // Apply Keyword cipher
+        function keywordCipher(text, keyword, decrypt = false) {
+            // Create cipher alphabet
+            keyword = keyword.toUpperCase().replace(/[^A-Z]/g, '');
+            const used = new Set(keyword.split(''));
+            let cipherAlphabet = keyword;
+            
+            // Add remaining letters
+            for (let i = 0; i < 26; i++) {
+                const letter = String.fromCharCode(65 + i);
+                if (!used.has(letter)) {
+                    cipherAlphabet += letter;
+                    used.add(letter);
+                }
+            }
+            
+            // Create mapping
+            const standardAlphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            const mapping = {};
+            
+            if (decrypt) {
+                for (let i = 0; i < 26; i++) {
+                    mapping[cipherAlphabet[i]] = standardAlphabet[i];
+                }
+            } else {
+                for (let i = 0; i < 26; i++) {
+                    mapping[standardAlphabet[i]] = cipherAlphabet[i];
+                }
+            }
+            
+            // Apply mapping
+            return text.replace(/[a-z]/gi, c => {
+                const upper = c.toUpperCase();
+                const transformed = mapping[upper] || c;
+                return c === upper ? transformed : transformed.toLowerCase();
+            });
+        }
+
+        // Apply Vigenère cipher
+        function vigenereCipher(text, keyword, decrypt = false) {
+            keyword = keyword.toUpperCase().replace(/[^A-Z]/g, '');
+            let keyIndex = 0;
+            const factor = decrypt ? -1 : 1;
+            
+            return text.replace(/[a-z]/gi, c => {
+                const base = c < 'a' ? 65 : 97;
+                const keyChar = keyword[keyIndex % keyword.length];
+                const keyOffset = keyChar.charCodeAt(0) - 65;
+                const offset = factor * keyOffset;
+                
+                keyIndex++;
+                return String.fromCharCode((c.charCodeAt(0) - base + offset + 26) % 26 + base);
+            });
+        }
+
+        // Event Listeners
+        startBtn.addEventListener('click', () => {
+            const name = nameInput.value.trim();
+            
+            if (name.length < 3 || name.length > 20) {
+                nameError.classList.remove('hidden');
+                return;
+            }
+            
+            nameError.classList.add('hidden');
+            gameState.playerName = name;
+            startScreen.classList.add('hidden');
+            gameContainer.classList.remove('hidden');
+            
+            // Initialize game
+            initGame();
+        });
+
+        sendBtn.addEventListener('click', () => {
+            const message = messageInput.value.trim();
+            if (!message) return;
+            
+            addMessage('sent', message);
+            messageInput.value = '';
+            
+            // Check if it's an answer to the current puzzle
+            setTimeout(() => {
+                checkAnswer(message);
+            }, 1000);
+        });
+
+        messageInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendBtn.click();
+            }
+        });
+
+        // Note functionality
+        noteBtn.addEventListener('click', () => {
+            noteModal.classList.remove('hidden');
+        });
+
+        closeNoteBtn.addEventListener('click', () => {
+            noteModal.classList.add('hidden');
+        });
+
+        saveNoteBtn.addEventListener('click', () => {
+            gameState.notes = noteContent.value;
+            localStorage.setItem('cryptographNotes', gameState.notes);
+        });
+
+        // Clue functionality
+        clueBtn.addEventListener('click', () => {
+            const puzzle = puzzles[gameState.currentPuzzle];
+            if (gameState.cluesUnlocked.includes(puzzle.id)) {
+                clueText.textContent = puzzle.clue;
+                clueModal.classList.remove('hidden');
+            } else {
+                clueText.textContent = "You need to engage with the puzzle first before clues become available.";
+                clueModal.classList.remove('hidden');
+            }
+        });
+
+        closeClueBtn.addEventListener('click', () => {
+            clueModal.classList.add('hidden');
+        });
+
+        // Simulate professor going offline/online
+        setInterval(() => {
+            if (Math.random() > 0.9) {
+                profStatus.textContent = ["Online", "Typing...", "Away"][Math.floor(Math.random() * 3)];
+            }
+        }, 10000);
+    </script>
+</body>
+
+</html>
